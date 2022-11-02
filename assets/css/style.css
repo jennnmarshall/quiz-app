@@ -1,0 +1,44 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 10%;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+button {
+  display: block;
+  padding: 5px;
+  margin: 10px;
+  background-color: purple;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+}
+
+button:hover {
+  background-color: rgb(225, 155, 247);
+}
+
+li {
+  padding: 5px;
+  margin: 10px;
+  width: 50%;
+  background-color: purple;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: rgb(225, 155, 247);
+}
+
+p {
+    font-style: italic;
+    color: grey;
+}

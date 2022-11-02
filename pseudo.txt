@@ -1,0 +1,23 @@
+GIVEN I am taking a code quiz
+
+WHEN I click the start button - event listener click > starts timer and presents question
+THEN a timer starts and I am presented with a question
+
+WHEN I answer a question - event listener click on ordered list > answer right or wrong > logged score > present next question
+THEN I am presented with another question
+
+WHEN I answer a question incorrectly - wrong answer docks time, displays wrong at bottom, present next question
+THEN time is subtracted from the clock
+
+WHEN all questions are answered or the timer reaches 0 > go to final score/game over page > enter initials > local storage initials with score
+THEN the game is over
+
+WHEN the game is over > display stored initials, they are objects in an array - create array and concat?
+THEN I can save my initials and my score
+
+storing objects in an array
+variable questions = [
+    question: question text
+    options: options in an array
+    answer: the right answers
+]
