@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Coding Quiz</title>
-</head>
-<body>
+  </head>
+  <body>
+    <h3 id="timer"></h3>
     <section id="start-quiz">
-        <h1>Coding Quiz Challenge!</h1>
-            <h4>Here is some info about the quiz.</h4>
-            <button id="start">Start the quiz!</button>
+      <h1>Coding Quiz Challenge!</h1>
+      <h4>Here is some info about the quiz.</h4>
+      <button id="start">Start the quiz!</button>
     </section>
     <!-- <section id="q1" class="questions">
         <h2>Question 1</h2>
@@ -21,6 +22,29 @@
                 <button><li>answer 1</li></button>
             </ol>
     </section> -->
+    <section id="hidden" class="last-page">
+      <h1 id="game-over">All Done!</h1>
+      <h2 id="score"></h2>
+      <form method="POST">
+        <div class="input-group">
+          <label for="initials">Enter Initials</label>
+          <input
+            type="text"
+            name="initials"
+            id="name-init"
+            placeholder="Your Initials"
+          />
+        </div>
+        <button id="submit">Submit</button>
+      </form>
+    </section>
+    <!-- highScore -->
+    <section id="hidden" class="score-page">
+      <h1 id="score-title">High Scores!</h1>
+      <ol></ol>
+    </section>
+    <!-- section with form -->
+    <!-- section with high score and play again/reset buttons -->
     <script src="./assets/js/script.js"></script>
-</body>
+  </body>
 </html>
