@@ -76,9 +76,8 @@ function stopTimer() {
   body.appendChild(timer);
 }
 
-var newScore = score * 5;
-
-
+// var newScore = (score * 5);
+// console.log(newScore);
 
 // return user
 // function to change out question, or to go to the end page if out of questions
@@ -86,7 +85,7 @@ var changeQuestion = function () {
   index++;
   if (index === questions.length) {
     gameOverPage.setAttribute("style", "display:block");
-    highScore.textContent = "Your score is " + newScore + ", well done!";
+    highScore.textContent = "Your score is " + score + ", well done!";
     gameOver.appendChild(highScore);
     questionText.remove();
     qChoice1.remove();
@@ -179,45 +178,51 @@ var highScorePage = document.querySelector(".score-page");
 // this function gets the item
 function scoreTable(event) {
   event.preventDefault();
-// userscore is an empty array where the userInfo objects are stored
-    
+  gameOverPage.setAttribute("style", "display:none");
+  highScorePage.setAttribute("style", "display:block");
+  // userscore is an empty array where the userInfo objects are stored
+
   var userScore = JSON.parse(localStorage.getItem("user")) || [];
-//   set item, add displays here
-// userinfo is the object array containing the initials and player score
-  var userInfo = {
-    name: initialInput.value,
-    score: newScore,
-  };
-    userScore.push(userInfo);
-  
-    localStorage.setItem("user", JSON.stringify(userScore));
-    console.log(userScore);
+  //   set item, add displays here
+  // userinfo is the object array containing the initials and player score
 
-    gameOverPage.setAttribute("style", "display:none");
-    highScorePage.setAttribute("style", "display:block");
-  };
+  userScore.push(userInfo);
 
-
+  localStorage.setItem("user", JSON.stringify(userScore));
+  console.log(userScore);
+}
+var userScore = [];
 // go back button, reset scores button
-initialSubmit.addEventListener("submit", function() {
-    scoreTable();
-    printHighScores();
-}); 
+initialSubmit.addEventListener("click", function (event) {
+  event.preventDefault();
+  gameOverPage.setAttribute("style", "display:none");
+  highScorePage.setAttribute("style", "display:block");
+  // var userInfo = {
+  //     name: initialInput.value,
+  //     score: score,
+  // };
+  var userInfo = initialInput.value + " - " + score;
+  userScore = userScore.concat(userInfo);
+  localStorage.setItem("user", JSON.stringify(userScore));
+  console.log(userScore);
+  
+  userScore.push(userInfo);
+  printHighScores();
+});
+
+var newUser = JSON.parse(localStorage.getItem("user"));
 
 function printHighScores() {
-    event.preventDefault();
-
-    // move get item localstorage
-    userScore.sort(function(a, b) {
-    return b.score - a.score;
-    });
-    for (var i = 0; i < userScore.length; i+=1) {
+    console.log("print high scores");
+  // move get item localstorage
+//   userScore.sort(function (a, b) {
+//     return b.score - a.score;
+//   });
+  for (var i = 0; i < userScore.length -1; i++) {
     var newLine = document.createElement("li");
-    newLine.textContent = userScore[i].name + " - " + userScore[i].score;
+    newLine.textContent = newUser[i];
     scoreTitle.appendChild(scoreList);
     scoreList.appendChild(newLine);
-    }};
-// function 1 - initial box form with user score array, object user info, push of 
-// user info into user score ==> to localstorage, call next function
-// function 2 - call userscore, sort, forloop
-// new html page for high scores
+    console.log("for loop");
+  }
+}
