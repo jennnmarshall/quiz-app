@@ -22,26 +22,115 @@ var timeInterval = null;
 var initialSubmit = document.querySelector("#submit");
 var initialInput = document.querySelector("#name-init");
 var scoreList = document.createElement("ol");
+var restartButton = document.querySelector("#restart");
+var clearButton = document.querySelector("#clear");
 // adds class "alt colors" to the score list
 scoreList.classList.add("alt-colors");
 // user array with initials and score
-storageValid();
+// storageValid();
 // variable array of question objects
 var questions = [
   {
-    question: "What does HTML stand for?",
+    question: "I'm never gonna dance again, Guilty feet have got no rhythm",
     choices: [
-      "Hyper Trainer Markup Language",
-      "Hyper Text Marketing Language",
-      "Hyper Text Markup Language",
-      "Hyena Toothfairy Madeup Lingo",
+      "China Girl - David Bowie",
+      "Careless Whisper - George Michael",
+      "Beat It - Michael Jackson",
+      "Wake Me Up Before You Go-Go - Wham",
     ],
-    answer: "Hyper Text Markup Language",
+    answer: "Careless Whisper - George Michael",
   },
   {
-    question: "<h1>Header</h1> is the correct way of making a header in HTML.",
-    choices: ["True", "False", "Red", "Blue"],
-    answer: "True",
+    question: "I'm gonna live forever, I'm gonna learn how to fly",
+    choices: [
+      "Nothing Else Matters - Metallica",
+      "Never Gonna Give You Up - Rick Astley",
+      "Fame - Irene Cara",
+      "Sheer Heart Attack - Queen",
+    ],
+    answer: "Fame - Irene Cara",
+  },
+  {
+    question: "Clock strikes upon the hour, and the sun begins to fade",
+    choices: [
+      "I Wanna Dance With Somebody - Whitney Houston",
+      "These Dreams - Heart",
+      "Love Shack - The B-52s",
+      "Kiss - The Revolution",
+    ],
+    answer: "I Wanna Dance With Somebody - Whitney Houston",
+  },
+  {
+    question: "Pardon me for thinking, there's something under my hair",
+    choices: [
+      "Sweet Dreams(Are Made of This) - The Eurythmics",
+      "Fight For Your Right - Beastie Boys",
+      "New Power Generation - Prince",
+      "Push It! - Salt 'N Pepa",
+    ],
+    answer: "New Power Generation - Prince",
+  },
+  {
+    question:
+      "See the stone set in your eyes, see the thorn twist in your side",
+    choices: [
+      "Edge of Seventeen - Stevie Nicks",
+      "With or Without You - U2",
+      "Careless Whisper - George Michael",
+      "Time After Time - Cyndi Lauper",
+    ],
+    answer: "With or Without You - U2",
+  },
+  {
+    question: "Loving you would be easy if your colors were like my dreams",
+    choices: [
+      "Karma Chameleon - Culture Club",
+      "Keep on Loving You - REO Speedwagon",
+      "The Safety Dance - Men At Work",
+      "Straight Up - Paula Abdul",
+    ],
+    answer: "Karma Chameleon - Culture Club",
+  },
+  {
+    question: "Why is the bedroom so cold? You've turned away on your side",
+    choices: [
+      "Cold Hearted Snake - Paula Abdul",
+      "Pictures of You - The Cure",
+      "I Ran - Flock of Seagulls",
+      "Love Will Tear Us Apart - Joy Division",
+    ],
+    answer: "Love Will Tear Us Apart - Joy Division",
+  },
+  {
+    question:
+      "Once upon a time not long ago, when people wore pajamas and lived life slow",
+    choices: [
+      "Walk This Way - Run DMC",
+      "Children's Story - Slick Rick",
+      "Whatta Man - Salt 'N Pepa",
+      "Boyz-N-The-Hood - Eazy-E",
+    ],
+    answer: "Children's Story - Slick Rick",
+  },
+  {
+    question: "Trapped in purgatory, a lifeless object, alive",
+    choices: [
+      "One - Metallica",
+      "Boys Don't Cry - The Cure",
+      "Straight Outta Compton - NWA",
+      "Raining Blood - Slayer",
+    ],
+    answer: "Raining Blood - Slayer",
+  },
+  {
+    question: "I've been putting out fire with gasoline",
+    choices: [
+      "Girls Just Want to Have Fun - Cyndi Lauper",
+      "A Forest - The Cure",
+      "Cat People - David Bowie",
+      "Walk This Way - Run DMC",
+    ],
+    answer: "Cat People - David Bowie",
   },
 ];
 
@@ -65,6 +154,16 @@ function startTimer() {
       clearInterval(timeInterval);
       timer.textContent = "Time's up!";
       body.appendChild(timer);
+        gameOverPage.setAttribute("style", "display:block");
+        highScore.textContent = "Your score is " + score + ", well done!";
+        gameOver.appendChild(highScore);
+        questionText.remove();
+        qChoice1.remove();
+        qChoice2.remove();
+        qChoice3.remove();
+        qChoice4.remove();
+        correct.remove();
+        wrong.remove();
     }
   }, 1000);
 }
@@ -126,9 +225,11 @@ startButton.addEventListener("click", function (event) {
 qChoice1.addEventListener("click", function (event) {
   if (qChoice1.textContent === questions[index].answer) {
     listEl.appendChild(correct);
+    wrong.remove();
     score++;
   } else {
     listEl.appendChild(wrong);
+    correct.remove();
     timeLeft = timeLeft - 10;
   }
   changeQuestion();
@@ -137,9 +238,11 @@ qChoice1.addEventListener("click", function (event) {
 qChoice2.addEventListener("click", function (event) {
   if (qChoice2.textContent === questions[index].answer) {
     listEl.appendChild(correct);
+    wrong.remove();
     score++;
   } else {
     listEl.appendChild(wrong);
+    correct.remove();
     timeLeft = timeLeft - 10;
   }
   changeQuestion();
@@ -148,9 +251,11 @@ qChoice2.addEventListener("click", function (event) {
 qChoice3.addEventListener("click", function (event) {
   if (qChoice3.textContent === questions[index].answer) {
     listEl.appendChild(correct);
+    wrong.remove();
     score++;
   } else {
     listEl.appendChild(wrong);
+    correct.remove();
     timeLeft = timeLeft - 10;
   }
   changeQuestion();
@@ -159,9 +264,11 @@ qChoice3.addEventListener("click", function (event) {
 qChoice4.addEventListener("click", function (event) {
   if (qChoice4.textContent === questions[index].answer) {
     listEl.appendChild(correct);
+    wrong.remove();
     score++;
   } else {
     listEl.appendChild(wrong);
+    correct.remove();
     timeLeft = timeLeft - 10;
   }
   changeQuestion();
@@ -187,7 +294,7 @@ var highScorePage = document.querySelector(".score-page");
 //   localStorage.setItem("user", JSON.stringify(userScore));
 //   console.log(userScore);
 // }
-var userScore = [];
+var userScore = storageValid();
 
 function storageValid() {
   if (localStorage.length === 0) {
@@ -200,7 +307,13 @@ function storageValid() {
   return newUser;
 }
 
+restartButton.addEventListener("click", function (event) {
+  location.reload();
+});
 
+clearButton.addEventListener("click", function () {
+  localStorage.clear();
+});
 
 // go back button, reset scores button
 initialSubmit.addEventListener("click", function (event) {
@@ -212,6 +325,7 @@ initialSubmit.addEventListener("click", function (event) {
   localStorage.setItem("user", JSON.stringify(userScore));
   console.log(userScore);
   userScore.push(userInfo);
+  newUser = JSON.parse(localStorage.getItem("user"));
   printHighScores();
 });
 
@@ -219,11 +333,16 @@ var newUser = JSON.parse(localStorage.getItem("user"));
 
 function printHighScores() {
   console.log("print high scores");
-  for (var i = 0; i < userScore.length - 1; i++) {
+  for (var i = 0; i < userScore.length; i++) {
     var newLine = document.createElement("li");
     newLine.textContent = newUser[i];
-    scoreTitle.appendChild(scoreList);
     scoreList.appendChild(newLine);
     console.log("for loop");
   }
-}
+  scoreTitle.appendChild(scoreList);
+    
+};
+
+
+
+
