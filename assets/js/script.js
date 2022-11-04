@@ -26,8 +26,7 @@ var restartButton = document.querySelector("#restart");
 var clearButton = document.querySelector("#clear");
 // adds class "alt colors" to the score list
 scoreList.classList.add("alt-colors");
-// user array with initials and score
-// storageValid();
+
 // variable array of question objects
 var questions = [
   {
@@ -143,7 +142,7 @@ qChoice4.textContent = questions[0].choices[3];
 correct.textContent = "You're right!";
 wrong.textContent = "That's incorrect!";
 
-// function for timer
+// timer function, when time runs out it ends the quiz
 function startTimer() {
   timeInterval = setInterval(function () {
     timeLeft--;
@@ -174,8 +173,6 @@ function stopTimer() {
   timer.textContent = "Time's up!";
   body.appendChild(timer);
 }
-
-// runs storage check to prevent rewriting user score
 
 // return user
 // function to change out question, or to go to the end page if out of questions
@@ -209,7 +206,7 @@ var changeQuestion = function () {
   }
 };
 
-// start button event listener function
+// start button hides start page and brings up the first question
 startButton.addEventListener("click", function (event) {
   document.getElementById("start-quiz").style.display = "none";
   startTimer();
@@ -222,6 +219,7 @@ startButton.addEventListener("click", function (event) {
   listEl.appendChild(qChoice4);
 });
 
+// answer choice buttons adjust score and time accordingly
 qChoice1.addEventListener("click", function (event) {
   if (qChoice1.textContent === questions[index].answer) {
     listEl.appendChild(correct);
@@ -278,22 +276,7 @@ var scoreTitle = document.querySelector("#score-title");
 // unhide page 3 variable
 var highScorePage = document.querySelector(".score-page");
 
-// this function gets the item
-// function scoreTable(event) {
-//   event.preventDefault();
-//   gameOverPage.setAttribute("style", "display:none");
-//   highScorePage.setAttribute("style", "display:block");
-//   // userscore is an empty array where the userInfo objects are stored
-
-//   var userScore = JSON.parse(localStorage.getItem("user")) || [];
-//   //   set item, add displays here
-//   // userinfo is the object array containing the initials and player score
-
-//   userScore.push(userInfo);
-
-//   localStorage.setItem("user", JSON.stringify(userScore));
-//   console.log(userScore);
-// }
+// declares the userScore array as the function to prevent overwriting localstorage
 var userScore = storageValid();
 
 function storageValid() {
@@ -306,16 +289,16 @@ function storageValid() {
   }
   return newUser;
 }
-
+// restart button to begin quiz again on last page
 restartButton.addEventListener("click", function (event) {
   location.reload();
 });
-
+// clear button clears local storage
 clearButton.addEventListener("click", function () {
   localStorage.clear();
 });
 
-// go back button, reset scores button
+// submit button enters name and score to local storage, clears form page, brings up high score page
 initialSubmit.addEventListener("click", function (event) {
   event.preventDefault();
   gameOverPage.setAttribute("style", "display:none");
@@ -328,9 +311,9 @@ initialSubmit.addEventListener("click", function (event) {
   newUser = JSON.parse(localStorage.getItem("user"));
   printHighScores();
 });
-
+// global variable for newUser array containing parsed user name and score
 var newUser = JSON.parse(localStorage.getItem("user"));
-
+// this function creates a new line item and prints the user data to it for every index in the newUser array
 function printHighScores() {
   console.log("print high scores");
   for (var i = 0; i < userScore.length; i++) {
