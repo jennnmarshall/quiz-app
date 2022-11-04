@@ -149,7 +149,7 @@ function startTimer() {
     timer.textContent = timeLeft + " seconds left";
     body.appendChild(timer);
 
-    if (timeLeft === 0) {
+    if (timeLeft <= 0) {
       clearInterval(timeInterval);
       timer.textContent = "Time's up!";
       body.appendChild(timer);
