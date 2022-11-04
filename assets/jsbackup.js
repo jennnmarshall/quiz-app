@@ -25,7 +25,7 @@ var scoreList = document.createElement("ol");
 // adds class "alt colors" to the score list
 scoreList.classList.add("alt-colors");
 // user array with initials and score
-storageValid();
+
 // variable array of question objects
 var questions = [
   {
@@ -76,7 +76,8 @@ function stopTimer() {
   body.appendChild(timer);
 }
 
-// runs storage check to prevent rewriting user score
+// var newScore = (score * 5);
+// console.log(newScore);
 
 // return user
 // function to change out question, or to go to the end page if out of questions
@@ -171,46 +172,40 @@ var scoreTitle = document.querySelector("#score-title");
 // unhide page 3 variable
 var highScorePage = document.querySelector(".score-page");
 
+// console.log(user);
+// console.log(initialInput);
+
 // this function gets the item
-// function scoreTable(event) {
-//   event.preventDefault();
-//   gameOverPage.setAttribute("style", "display:none");
-//   highScorePage.setAttribute("style", "display:block");
-//   // userscore is an empty array where the userInfo objects are stored
+function scoreTable(event) {
+  event.preventDefault();
+  gameOverPage.setAttribute("style", "display:none");
+  highScorePage.setAttribute("style", "display:block");
+  // userscore is an empty array where the userInfo objects are stored
 
-//   var userScore = JSON.parse(localStorage.getItem("user")) || [];
-//   //   set item, add displays here
-//   // userinfo is the object array containing the initials and player score
+  var userScore = JSON.parse(localStorage.getItem("user")) || [];
+  //   set item, add displays here
+  // userinfo is the object array containing the initials and player score
 
-//   userScore.push(userInfo);
+  userScore.push(userInfo);
 
-//   localStorage.setItem("user", JSON.stringify(userScore));
-//   console.log(userScore);
-// }
-var userScore = [];
-
-function storageValid() {
-  if (localStorage.length === 0) {
-    console.log("clear");
-    newUser = [];
-  } else {
-    console.log("else");
-    newUser = JSON.parse(localStorage.getItem("user"));
-  }
-  return newUser;
+  localStorage.setItem("user", JSON.stringify(userScore));
+  console.log(userScore);
 }
-
-
-
+var userScore = [];
 // go back button, reset scores button
 initialSubmit.addEventListener("click", function (event) {
   event.preventDefault();
   gameOverPage.setAttribute("style", "display:none");
   highScorePage.setAttribute("style", "display:block");
+  // var userInfo = {
+  //     name: initialInput.value,
+  //     score: score,
+  // };
   var userInfo = initialInput.value + " - " + score;
   userScore = userScore.concat(userInfo);
   localStorage.setItem("user", JSON.stringify(userScore));
   console.log(userScore);
+
   userScore.push(userInfo);
   printHighScores();
 });
@@ -219,6 +214,10 @@ var newUser = JSON.parse(localStorage.getItem("user"));
 
 function printHighScores() {
   console.log("print high scores");
+  // move get item localstorage
+  //   userScore.sort(function (a, b) {
+  //     return b.score - a.score;
+  //   });
   for (var i = 0; i < userScore.length - 1; i++) {
     var newLine = document.createElement("li");
     newLine.textContent = newUser[i];
